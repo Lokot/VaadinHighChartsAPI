@@ -24,6 +24,7 @@ public class Axis {
     private boolean allowDecimals = true;
     private int tickLength = 1;
     private int gridLineWidth = 1;
+    private boolean opposite = false;
 
     @Deprecated
     /**
@@ -231,8 +232,16 @@ public class Axis {
     public void setGridLineWidth(int gridLineWidth) {
         this.gridLineWidth = gridLineWidth;
     }
+    
+    public boolean isOpposite() {
+		return opposite;
+	}
 
-    public String getHighChartValue() throws HighChartsException {
+	public void setOpposite(boolean opposite) {
+		this.opposite = opposite;
+	}
+
+	public String getHighChartValue() throws HighChartsException {
 
         if (this.axisType == null) throw new HighChartsException("No AxisType was set to the passed Axis object.");
 
@@ -289,6 +298,11 @@ public class Axis {
 
         //Axis Labels
         builder.append(", labels: { enabled: " + this.labelsEnabled + " }");
+        
+        //Axis Opposite
+        if (this.opposite) {
+            builder.append(", opposite : true");
+        }
 
         //Close Tag
         builder.append("}");

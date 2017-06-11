@@ -22,6 +22,7 @@ public class HighChartsSeriesImpl implements HighChartsSeries {
     ChartType chartType;
     List<HighChartsData> data = new ArrayList<>();
     String name;
+    private boolean visible = true;
 
     public String getName() {
         return this.name;
@@ -142,11 +143,19 @@ public class HighChartsSeriesImpl implements HighChartsSeries {
 
     @Override
     public String getHighChartValue() {
-        return "{ name: '" + this.name + "', type: '" + this.chartType.name().toLowerCase() + "', data: " + this.data + " }";
+        return "{ name: '" + this.name + "', type: '" + this.chartType.name().toLowerCase() + "', visible: " + this.visible + ", data: " + this.data + " }";
     }
 
     @Override
     public String toString() {
         return this.getHighChartValue();
     }
+
+	public boolean isVisible() {
+		return visible;
+	}
+
+	public void setVisible(boolean visible) {
+		this.visible = visible;
+	}
 }

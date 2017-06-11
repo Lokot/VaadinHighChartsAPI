@@ -4,17 +4,23 @@
 
 package at.downdrown.vaadinaddons.highchartsapi.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import at.downdrown.vaadinaddons.highchartsapi.Colors;
 import at.downdrown.vaadinaddons.highchartsapi.exceptions.HighChartsException;
 import at.downdrown.vaadinaddons.highchartsapi.exceptions.NoChartTypeException;
 import at.downdrown.vaadinaddons.highchartsapi.exceptions.WrongPlotOptionsException;
 import at.downdrown.vaadinaddons.highchartsapi.exceptions.WrongSeriesException;
-import at.downdrown.vaadinaddons.highchartsapi.model.plotoptions.*;
+import at.downdrown.vaadinaddons.highchartsapi.model.plotoptions.AreaChartPlotOptions;
+import at.downdrown.vaadinaddons.highchartsapi.model.plotoptions.BarChartPlotOptions;
+import at.downdrown.vaadinaddons.highchartsapi.model.plotoptions.ColumnChartPlotOptions;
+import at.downdrown.vaadinaddons.highchartsapi.model.plotoptions.HighChartsPlotOptions;
+import at.downdrown.vaadinaddons.highchartsapi.model.plotoptions.LineChartPlotOptions;
+import at.downdrown.vaadinaddons.highchartsapi.model.plotoptions.PieChartPlotOptions;
 import at.downdrown.vaadinaddons.highchartsapi.model.series.HighChartsSeries;
-import com.vaadin.shared.ui.colorpicker.Color;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.vaadin.shared.ui.colorpicker.Color;
 
 public class ChartConfiguration {
 
@@ -38,6 +44,7 @@ public class ChartConfiguration {
     private List<Color> colors = new ArrayList<Color>();
     private HighChartsPlotOptions plotOptions = null;
     private ZoomType zoomType = null;
+    private PaneOptions paneOptions = null;
 
     //Constructors
     public ChartConfiguration() {
@@ -344,6 +351,11 @@ public class ChartConfiguration {
         builder.append("}");
         builder.append("}");
 
+        // Pane options
+        if(getPaneOptions() != null){
+        	builder.append(",pane: " + getPaneOptions().getHighChartValue());
+        }
+        
         //Set Subtitle if any was given
         builder.append(", subtitle: { ");
         if (getSubTitle() != null) {
@@ -361,7 +373,7 @@ public class ChartConfiguration {
 
 
         if (getxAxis() != null) builder.append(", " + getxAxis().getHighChartValue());
-        if (getyAxis() != null) builder.append(", " + getyAxis().getHighChartValue());
+        if (getyAxis() != null) builder.append(", " + getyAxis().getHighChartValue());	
 
         builder.append(", credits: { enabled: " + isCreditsEnabled() + " }");
         builder.append(", legend: { enabled: " + isLegendEnabled() + " }");
@@ -430,4 +442,12 @@ public class ChartConfiguration {
         this.yAxis.setGridLineWidth(0);
         this.yAxis.setTickLength(0);
     }
+
+	public PaneOptions getPaneOptions() {
+		return paneOptions;
+	}
+
+	public void setPaneOptions(PaneOptions paneOptions) {
+		this.paneOptions = paneOptions;
+	}
 }

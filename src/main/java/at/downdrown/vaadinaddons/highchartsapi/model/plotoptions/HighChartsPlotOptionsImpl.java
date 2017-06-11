@@ -24,6 +24,7 @@ public class HighChartsPlotOptionsImpl implements HighChartsPlotOptions {
     private boolean showCheckBox = false;
     private boolean connectNulls = false;
     private Steps steps = Steps.FALSE;
+    private boolean marker = true;
 
     /**
      * Returns if datalabels are enabled.
@@ -256,6 +257,9 @@ public class HighChartsPlotOptionsImpl implements HighChartsPlotOptions {
         builder.append(chartType.getHighChartValue() + ": { ");
         builder.append("allowPointSelect: " + allowPointSelect);
         builder.append(", dashStyle: '" + dashStyle.name() +"'");
+        builder.append(", marker: { ");
+        builder.append("enabled: " + marker + "");
+        builder.append(" }");
         builder.append(", showCheckbox: " + showCheckBox);
         builder.append(", step: " + (steps == Steps.FALSE ? "false" : "'" + steps.name() + "'"));
         builder.append(", connectNulls: " + connectNulls);
@@ -276,7 +280,15 @@ public class HighChartsPlotOptionsImpl implements HighChartsPlotOptions {
         return builder.toString();
     }
 
-    public enum DashStyle {
+    public boolean isMarker() {
+		return marker;
+	}
+
+	public void setMarker(boolean marker) {
+		this.marker = marker;
+	}
+
+	public enum DashStyle {
         Solid,
         ShortDash,
         ShortDot,

@@ -99,6 +99,6 @@ public abstract class AbstractHighChart extends AbstractJavaScriptComponent {
      */
     public void redraw(ChartConfiguration configuration) throws HighChartsException {
         this.setChartoptions(configuration.getHighChartValue());
-        JavaScript.getCurrent().execute("$(#" + this.getDomId() + ").redraw();");
+        JavaScript.getCurrent().execute("$('#" + this.getDomId() + "').redraw();");
     }
 }
